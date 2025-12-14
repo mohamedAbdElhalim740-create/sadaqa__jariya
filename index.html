@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صدقة جارية | الحاجة أم وجيه</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0fbcf9;
+            --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* خلفية متحركة */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* الحاوية الزجاجية */
+        .container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            position: relative;
+            z-index: 10;
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            color: #ffd700;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .counter-display {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .zikr-text {
+            font-size: 1.5rem;
+            min-height: 60px;
+            margin-bottom: 20px;
+            color: #d1d8e0;
+            transition: opacity 0.3s;
+        }
+
+        /* زر التسبيح */
+        .sebha-btn {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(15, 188, 249, 0.3);
+            transition: all 0.1s ease;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sebha-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 10px rgba(15, 188, 249, 0.5);
+        }
+
+        .sebha-btn::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #0fbcf9;
+            opacity: 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* زر إعادة الضبط */
+        .reset-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 5px 15px;
+            border-radius: 15px;
+            margin-top: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .reset-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        /* تأثيرات بسيطة للخلفية */
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            z-index: 1;
+        }
+        .s1 { width: 200px; height: 200px; top: -50px; left: -50px; }
+        .s2 { width: 300px; height: 300px; bottom: -100px; right: -50px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-shape s1"></div>
+    <div class="bg-shape s2"></div>
+
+    <div class="container">
+        <header>
+            <h1>صدقة جارية</h1>
+            <h2>عن المرحومة الحاجة أم وجيه</h2>
+        </header>
+
+        <div class="zikr-container">
+            <div class="zikr-text" id="zikrPhrase">سبحان الله</div>
+            <div class="counter-display" id="counter">0</div>
+        </div>
+
+        <button class="sebha-btn" id="sebhaBtn">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20v-6M12 8V2"/>
+                <circle cx="12" cy="14" r="2"/>
+                <circle cx="12" cy="5" r="2"/>
+            </svg>
+        </button>
+
+        <br>
+        <button class="reset-btn" id="resetBtn">إعادة ضبط</button>
+
+        <footer>
+            Designed by Mohamed Abd Elhalim
+        </footer>
+    </div>
+
+    <script>
+        // المتغيرات
+        let count = parseInt(localStorage.getItem('sebhaCount')) || 0;
+        let currentZikrIndex = 0;
+        
+        const zikrPhrases = [
+            "سبحان الله",
+            "الحمد لله",
+            "لا إله إلا الله",
+            "الله أكبر",
+            "لا حول ولا قوة إلا بالله العلي العظيم",
+            "أستغفر الله العظيم وأتوب إليه",
+            "اللهم صل وسلم على نبينا محمد"
+        ];
+
+        // العناصر
+        const counterDisplay = document.getElementById('counter');
+        const zikrDisplay = document.getElementById('zikrPhrase');
+        const btn = document.getElementById('sebhaBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        // تحديث الشاشة عند البدء
+        updateDisplay();
+
+        // دالة الضغط على الزر
+        btn.addEventListener('click', function() {
+            count++;
+            
+            // تغيير الذكر كل 33 عدة (اختياري) أو كل ضغطة لو حابب.
+            // هنا الكود يغير الذكر بالتتابع مع كل ضغطة ليكون ممتعاً بصرياً كما طلبت
+            // لو عايزها 33 و 33 قولي أعدلها. حالياً هي "دورة" كاملة.
+            currentZikrIndex = (currentZikrIndex + 1) % zikrPhrases.length;
+
+            // تحديث النص بتأثير بسيط
+            zikrDisplay.style.opacity = 0;
+            setTimeout(() => {
+                zikrDisplay.textContent = zikrPhrases[currentZikrIndex];
+                zikrDisplay.style.opacity = 1;
+            }, 100);
+
+            // اهتزاز الموبايل (Haptic Feedback)
+            if (navigator.vibrate) {
+                navigator.vibrate(40); 
+            }
+
+            // حفظ العدد وتحديث الشاشة
+            localStorage.setItem('sebhaCount', count);
+            updateDisplay();
+            
+            // تأثير حركة للزر
+            btn.style.transform = "scale(0.95)";
+            setTimeout(() => btn.style.transform = "scale(1)", 100);
+        });
+
+        // دالة إعادة الضبط
+        resetBtn.addEventListener('click', function() {
+            if(confirm("هل أنت متأكد من تصفير العداد؟")) {
+                count = 0;
+                currentZikrIndex = 0;
+                localStorage.setItem('sebhaCount', 0);
+                zikrDisplay.textContent = zikrPhrases[0];
+                updateDisplay();
+            }
+        });
+
+        function updateDisplay() {
+            counterDisplay.textContent = count.toLocaleString('ar-EG');
+        }
+    </script>
+</body>
+</html>
